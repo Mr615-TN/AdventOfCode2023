@@ -11,14 +11,16 @@ def calculateSum(calibration_txt):
         sum += new_digit
 
     return sum
-calibration_document = [
-    "1abc2",
-    "pqr3stu8vwx",
-    "a1b2c3d4e5f",
-    "treb7uchet"
-]
+def calibration_file(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            return [line.strip() for line in file.readlines()]
+    except FileNotFoundError:
+        print(f"Error: File '{file_path}' not found.")
+        return None
 
-result = calculateSum(calibration_document)
-
-# Print the result
-print("The sum of all calibration values is:", result)
+file_path = 'puzzleInput.txt'
+calibration_document = calibration_file(file_path)
+if calibration_document:
+    result = calculateSum(calibration_document)
+    print("The sum of all calibration values is:", result)
